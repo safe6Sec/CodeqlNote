@@ -96,7 +96,7 @@ codeql database upgrade database/javasec
 
 
 
-### Method
+### 过滤 Method
 
 #### 根据Method name查询
 
@@ -129,6 +129,95 @@ from Method method
 where method.hasName("toObject") and method.getDeclaringType().getASupertype().hasQualifiedName("org.apache.struts2.rest.handler", "ContentTypeHandler")
 select method
 ```
+
+
+
+过滤 方法调用
+
+### MethodAccess
+
+一般是先查`method`，与`MethodAccess.getMethod()` 进行比较。
+
+比如查`ContentTypeHandler` 的 `toObject()` 方法的调用。
+
+```
+import java
+
+from MethodAccess call, Method method
+where method.hasName("toObject") and method.getDeclaringType().getASupertype().hasQualifiedName("org.apache.struts2.rest.handler", "ContentTypeHandler") and call.getMethod() = method
+select call
+```
+
+上面这种查询方式不行，只能查到`JsonLibHandler` 这样显式定义的。
+
+怎么改进呢？
+
+也可以使用`getAnAncestor()` 或者`getASupertype()*`
+
+```
+import java
+
+from MethodAccess call, Method method
+where method.hasName("toObject") and method.getDeclaringType().getAnAncestor().hasQualifiedName("org.apache.struts2.rest.handler", "ContentTypeHandler") and call.getMethod() = method
+select call
+```
+
+
+
+
+
+# 数据流跟踪
+
+数据流分析要继承`DataFlow::Configuration` 这个类，然后重载`isSource` 和`isSink` 方法
+
+
+
+```
+class MyConfig extends DataFlow::Configuration {
+  MyConfig() { this = "Myconfig" }
+  override predicate isSource(DataFlow::Node source) {
+    ....
+    
+  }
+
+    override predicate isSink(DataFlow::Node sink) {
+    ....
+    
+  }
+}
+```
+
+
+
+污点跟踪
+
+污点跟踪分析要继承`TaintTracking::Configuration` 这个类，然后重载`isSource` 和`isSink` 方法
+
+```
+class VulConfig extends TaintTracking::Configuration {
+VulConfig() { this = "myConfig" }
+
+override predicate isSource(DataFlow::Node source) {
+
+}
+
+override predicate isSink(DataFlow::Node sink) {
+
+}
+}
+
+from VulConfig config, DataFlow::PathNode source, DataFlow::PathNode sink
+where config.hasFlowPath(source, sink)
+select sink.getNode(), source, sink, "source are"
+```
+
+
+
+
+
+
+
+
 
 
 
