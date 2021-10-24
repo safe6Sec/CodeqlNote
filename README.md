@@ -1,5 +1,5 @@
 # CodeqlNote
-记录学习Codeql的笔记，国内资料真的挺少。
+记录学习Codeql的笔记，国内资料真的挺少。随便记的，比较乱。学完之后再整理
 
 
 
@@ -189,7 +189,7 @@ class MyConfig extends DataFlow::Configuration {
 
 
 
-污点跟踪
+# 污点跟踪
 
 污点跟踪分析要继承`TaintTracking::Configuration` 这个类，然后重载`isSource` 和`isSink` 方法
 
@@ -212,6 +212,116 @@ select sink.getNode(), source, sink, "source are"
 ```
 
 
+
+# 白盒扫描
+
+ql库集成了许多常见的安全漏洞，可以直接拿来扫描项目源码
+
+https://codeql.github.com/codeql-query-help/java/
+
+
+
+下面是写好的
+
+ java
+1、zip slip（zip解压覆盖任意文件）
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-022/ZipSlip.ql
+
+2、命令注入
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-078/ExecUnescaped.ql
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-078/ExecTainted.ql
+
+3、cookie安全
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-312/CleartextStorageCookie.ql
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-614/InsecureCookie.ql
+
+4、XSS
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-079/XSS.ql
+
+5、依赖漏洞
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-1104/MavenPomDependsOnBintray.ql
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-829/InsecureDependencyResolution.ql
+
+6、反序列化
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-502/UnsafeDeserialization.ql
+
+7、http头注入
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-113/NettyResponseSplitting.ql
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-113/ResponseSplitting.ql
+
+8、url跳转
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-601/UrlRedirect.ql
+
+9、ldap注入
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-090/LdapInjection.ql
+
+10、sql注入
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-089/SqlTainted.ql
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-089/SqlUnescaped.ql
+
+11、file权限&目录注入
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-732/ReadingFromWorldWritableFile.ql
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-022/TaintedPath.ql
+
+12、xml注入
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-611/XXE.ql
+
+13、SSL校验
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-297/UnsafeHostnameVerification.ql
+
+14、弱加密
+
+https://github.com/github/codeql/java/ql/src/Security/CWE/CWE-327/BrokenCryptoAlgorithm.ql
+
+15、随机数种子可预测
+
+https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-335/PredictableSeed.ql
+
+
+codeql analyze命令可以执行单个ql文件，目录下所有ql文件，和查询suite(.qls)
+
+ 
+
+白盒扫描使用如下命令（执行所有漏洞类查询）
+
+codeql database analyze source_database_name qllib/java/ql/src/codeql-suites/java-security-extended.qls --format=csv --output=java-results.csv
+
+如果是自己写可用于analyze的必须按规范写，包含元数据@kind,如下这种
+
+```
+/**
+ * @name Incomplete regular expression for hostnames
+ * @description Matching a URL or hostname against a regular expression that contains an unescaped
+ *              dot as part of the hostname might match more hostnames than expected.
+ * @kind path-problem
+ * @problem.severity warning
+ * @security-severity 7.8
+ * @precision high
+ * @id go/incomplete-hostname-regexp
+ * @tags correctness
+ *       security
+ *       external/cwe/cwe-20
+ */
+```
 
 
 
