@@ -1,5 +1,5 @@
 # CodeqlNote
-记录学习Codeql的笔记，国内资料真的挺少。随便记的，比较乱。学完之后再整理
+记录学习Codeql的笔记，国内资料真的挺少。摘抄各种大佬文章随便记的，比较乱。随缘记录。
 
 
 
@@ -130,6 +130,10 @@ where method.hasName("toObject") and method.getDeclaringType().getASupertype().h
 select method
 ```
 
+#### Call和Callable
+Callable表示可调用的方法或构造器的集合。   
+
+Call表示调用Callable的这个过程（方法调用，构造器调用等等）    
 
 
 过滤 方法调用
@@ -168,7 +172,24 @@ select call
 
 # 数据流跟踪
 
-数据流分析要继承`DataFlow::Configuration` 这个类，然后重载`isSource` 和`isSink` 方法
+Local Data Flow分析SPEL
+```
+import java
+import semmle.code.java.frameworks.spring.SpringController
+import semmle.code.java.dataflow.TaintTracking
+from Call call,Callable parseExpression,SpringRequestMappingMethod route
+where
+    call.getCallee() = parseExpression and 
+    parseExpression.getDeclaringType().hasQualifiedName("org.springframework.expression", "ExpressionParser") and
+    parseExpression.hasName("parseExpression") and 
+   TaintTracking::localTaint(DataFlow::parameterNode(route.getARequestParameter()),DataFlow::exprNode(call.getArgument(0))) 
+select route.getARequestParameter(),call
+```
+本地数据流
+本地数据流是单个方法(一旦变量跳出该方法即为数据流断开)或可调用对象中的数据流。本地数据流通常比全局数据流更容易、更快、更精确。
+
+
+全局数据流分析要继承`DataFlow::Configuration` 这个类，然后重载`isSource` 和`isSink` 方法
 
 
 
@@ -191,7 +212,9 @@ class MyConfig extends DataFlow::Configuration {
 
 # 污点跟踪
 
-污点跟踪分析要继承`TaintTracking::Configuration` 这个类，然后重载`isSource` 和`isSink` 方法
+
+
+全局污点跟踪分析要继承`TaintTracking::Configuration` 这个类，然后重载`isSource` 和`isSink` 方法
 
 ```
 class VulConfig extends TaintTracking::Configuration {
