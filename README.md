@@ -11,6 +11,10 @@
 
 这东西本质就是写各种过滤条件、各种数据流跟踪，就和写sql语句一样玩。里面的谓词就是把各种过滤条件封装成方法。
 
+# 下载
+文档 https://codeql.github.com/docs/codeql-cli/    
+二进制https://github.com/github/codeql-cli-binaries     
+https://github.com/github/vscode-codeql-starter  
 
 
 # 生成数据库
