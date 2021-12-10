@@ -1,5 +1,5 @@
 # CodeqlNote
-记录学习Codeql的笔记，国内资料真的挺少。摘抄各种大佬文章随便记的，比较乱。随缘记录。
+记录学习Codeql的笔记，国内资料真的挺少。摘抄各种大佬文章随便记的，比较乱,抽空整理。
 
 
 
@@ -355,7 +355,52 @@ codeql database analyze source_database_name qllib/java/ql/src/codeql-suites/jav
 
 
 
+# Chrome书签
+自己学习codeql 看过的一些文章
 
+- [CodeQL从入门到放弃 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/283795.html)
+- [使用codeql挖掘fastjson利用链 - 先知社区](https://xz.aliyun.com/t/7482)
+- [CodeQL documentation](https://codeql.github.com/docs/)
+- https://www.4hou.com/search-post?page=4&keywords=codeql
+- [代码分析平台CodeQL学习手记（十七） - 嘶吼 RoarTalk – 回归最本质的信息安全,互联网安全新媒体,4hou.com](https://www.4hou.com/posts/o6wX)
+- [Query console - LGTM](https://lgtm.com/query/lang:java/)
+- [使用codeql 挖掘 ofcms - 安全客，安全资讯平台](https://www.anquanke.com/post/id/203674)
+- [haby0/mark: notes](https://github.com/haby0/mark)
+- [codeql学习——污点分析 - 先知社区](https://xz.aliyun.com/t/7789)
+- [codeql学习笔记 - 知乎](https://zhuanlan.zhihu.com/p/354275826)
+- [github/vscode-codeql-starter: Starter workspace to use with the CodeQL extension for Visual Studio Code.](https://github.com/github/vscode-codeql-starter)
+- [codeql学习——污点分析 - 先知社区](https://xz.aliyun.com/t/7789#toc-0)
+- [CodeQL for Golang Practise(3)](http://f4bb1t.com/post/2020/12/16/codeql-for-golang-practise3/)
+- [CodeQL静态代码扫描之实现关联接口、入参、和危险方法并自动化构造payload及抽象类探究](https://mp.weixin.qq.com/s/Rqo12z9mapwlj6wGHZ1zZA)
+- [Codeql分析Vulnerability-GoApp - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/253491.html)
+- [codeql反序列化分析](https://github.com/githubsatelliteworkshops/codeql)
+- [[原创\]58集团白盒代码审计系统建设实践2：深入理解SAST-业务安全-看雪论坛-安全社区|安全招聘|bbs.pediy.com](https://bbs.pediy.com/thread-266995.htm#msg_header_h1_4)
+- [楼兰#CodeQL](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzg4ODU4ODYzOQ==&action=getalbum&album_id=1970201600723910658&scene=173&from_msgid=2247484983&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
+- [CodeQL学习笔记 | Gamous'Site](http://blog.gamous.cn/post/codeql/)
+- [language:go - Search - LGTM](https://lgtm.com/search?q=language%3Ago&t=rules)
+- [CodeQL 和代码扫描简介 - GeekMasher 的博客](https://geekmasher.dev/posts/sast/codeql-introduction)
+- [CVE-2018-11776: 如何使用CodeQL发现5个 Apache Struts RCEs](https://mp.weixin.qq.com/s/LmOFGAhqAKiO8VDQW4vvLg)
+- [CodeQL静态代码扫描规则编写之RemoteFlowSource](https://mp.weixin.qq.com/s/jVZ3Op8FYBmiFAV3p0li3w)
+- [CodeQL静态代码扫描之抽象类探究](https://mp.weixin.qq.com/s/KQso2nvWx737smunUHwXag)
+- [Codeql规则编写入门](https://mp.weixin.qq.com/s/sAUSgRAohFlmzwSkkWjp9Q)
+- [About LGTM - Help - LGTM](https://lgtm.com/help/lgtm/about-lgtm)
+- [LGTM help & documentation](https://help.semmle.com/home/help/home.html)
+- [Capture the flag | GitHub Security Lab](https://securitylab.github.com/ctf/)
+- [CodeQL笔记 | LFYSec](https://lfysec.top/2020/06/03/CodeQL笔记/)
+- [CodeQL学习——CodeQl数据流分析 - bamb00 - 博客园](https://www.cnblogs.com/goodhacker/p/13583650.html)
+- [分类: codeql - 食兔人的博客](https://blog.ycdxsb.cn/categories/research/codeql/)
+- [CodeQL - butter-fly](https://yourbutterfly.github.io/note-site/module/semmle-ql/codeql/)
+- [表达式](https://www.4hou.com/posts/lM11)
+- [mark/CodeQL-数据流在Java中的使用.md at master · haby0/mark](https://github.com/haby0/mark/blob/master/articles/2021/CodeQL-数据流在Java中的使用.md)
+- [github/securitylab: Resources related to GitHub Security Lab](https://github.com/github/securitylab)
+- [CodeQL从0到1（内附Shiro检测demo） - 安全客，安全资讯平台](https://www.anquanke.com/post/id/255721)
+- [codeql挖掘React应用的XSS实践 | Image's blog](https://hexo.imagemlt.xyz/post/javascript-codeql-learning/)
+- [SummerSec/learning-codeql: CodeQL Java 全网最全的中文学习资料](https://github.com/SummerSec/learning-codeql)
+- [CodeQL query help for Go — CodeQL query help documentation](https://codeql.github.com/codeql-query-help/go/#)
+- [codeql使用指南_zzzzfeng的博客-CSDN博客_codeql使用](https://blog.csdn.net/haoren_xhf/article/details/115064677)
+- [Apache Dubbo：条条大路通RCE | GitHub 安全实验室](https://securitylab.github.com/research/apache-dubbo/)
+- [如何用CodeQL数据流复现 apache kylin命令执行漏洞 - 先知社区](https://xz.aliyun.com/t/8240)
+- [如何利用CodeQL挖掘CVE-2020-10199 - 安全客，安全资讯平台](https://www.anquanke.com/post/id/202987)
 
 
 
