@@ -3,13 +3,17 @@
 
 
 
+**感兴趣的师傅推荐直接看最下面的书签和文章！！！**
+
+
+
 
 
 
 
 # codeql
 
-这东西本质就是写各种过滤条件、各种数据流跟踪，就和写sql语句一样玩。里面的谓词就是把各种过滤条件封装成方法。
+这东西本质就是写各种过滤条件、各种数据流跟踪，感觉就和写sql语句一样。里面的谓词就是把各种过滤条件封装成方法。
 
 # 下载
 文档 https://codeql.github.com/docs/codeql-cli/    
@@ -413,6 +417,7 @@ codeql database analyze source_database_name qllib/java/ql/src/codeql-suites/jav
 
 - https://github.com/SummerSec/learning-codeql
 - https://www.anquanke.com/post/id/203674
+- https://fynch3r.github.io/tags/CodeQL/
 - https://xz.aliyun.com/t/7482
 - https://www.freebuf.com/articles/web/283795.html
 
