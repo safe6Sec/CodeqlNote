@@ -13,22 +13,31 @@
 
 # codeql
 
-这东西本质就是写各种过滤条件、各种数据流跟踪，感觉就和写sql语句一样。里面的谓词就是把各种过滤条件封装成方法。
+1. 这东西本质就是写各种过滤条件、各种数据流跟踪，给我的感觉就是在写面向对象的sql一样，所以在学习之前最好掌握面向对象思想，一门面向对象的编程语言，sql语句编写。
+
+2. codeql工作原理主要是，利用分析引擎分析代码之间的关系，生成一个代码数据库。然后我们直接写ql就可以进行各种查询，如找某个方法或者某个类，找方法引用，跟踪某个参数的传递等等用法。
+3. codeql里面的谓词其实就是把各种过滤条件封装成方法。
+4. java里面是万物皆对象，我觉得codeql是万物皆表达式。
+5. lgtm除了用来下数据库还可以用来搜索ql
+
+
 
 # 下载
-文档 https://codeql.github.com/docs/codeql-cli/    
-二进制https://github.com/github/codeql-cli-binaries     
-https://github.com/github/vscode-codeql-starter  
+文档： https://codeql.github.com/docs/codeql-cli/    
+二进制：https://github.com/github/codeql-cli-binaries     
+现成项目：https://github.com/github/vscode-codeql-starter  
+
+数据库下载，在线查询，规则搜索：https://lgtm.com/
 
 
 # 生成数据库
 
-创建索引代码数据库
+第一步、创建索引代码数据库。得有数据库才能开始查询。
 
 ```
 codeql database create <database> --language=<language-identifier>
 ```
-language对应关系如下
+支持的语言及language对应关系如下
 
 
 | Language              | Identity   |
@@ -39,10 +48,11 @@ language对应关系如下
 | Java                  | java       |
 | javascript/Typescript | javascript |
 | Python                | python     |
+| Ruby                  | Ruby       |
 
 
 
-1、生成代码扫描数据库
+1、生成代码扫描数据库(java)
 
 ```
 codeql database create D:\codeqldb/javasec --language=java  --command="mvn clean install --file pom.xml -Dmaven.test.skip=true" --source-root=./javasec
@@ -58,8 +68,6 @@ codeql database create D:\codeqldb/javasec --language=java  --command="mvn clean
  无论项目结果如何,构建从不失败
  --command="mvn -fn clean install --file pom.xml -Dmaven.test.skip=true"
 ```
-
-
 
 
 
@@ -108,7 +116,7 @@ codeql database upgrade database/javasec
 
 #### 根据Method name查询
 
-```
+```java
 import java
 
 from Method method
@@ -118,7 +126,7 @@ select method
 
 把这个方法的`class` `name`也查出来
 
-```
+```java
 import java
 
 from Method method
@@ -130,7 +138,7 @@ select method, method.getDeclaringType()
 
 比如我想查询`ContentTypeHandler` 的所有子类`toObject`方法
 
-```
+```java
 import java
 
 from Method method
@@ -152,7 +160,7 @@ Call表示调用Callable的这个过程（方法调用，构造器调用等等�
 
 比如查`ContentTypeHandler` 的 `toObject()` 方法的调用。
 
-```
+```java
 import java
 
 from MethodAccess call, Method method
@@ -166,7 +174,7 @@ select call
 
 也可以使用`getAnAncestor()` 或者`getASupertype()*`
 
-```
+```java
 import java
 
 from MethodAccess call, Method method
@@ -181,6 +189,10 @@ select call
 # 数据流跟踪
 
 Local Data Flow分析SPEL
+
+本地数据流
+本地数据流是单个方法(一旦变量跳出该方法即为数据流断开)或可调用对象中的数据流。本地数据流通常比全局数据流更容易、更快、更精确。
+
 ```
 import java
 import semmle.code.java.frameworks.spring.SpringController
@@ -193,13 +205,10 @@ where
    TaintTracking::localTaint(DataFlow::parameterNode(route.getARequestParameter()),DataFlow::exprNode(call.getArgument(0))) 
 select route.getARequestParameter(),call
 ```
-本地数据流
-本地数据流是单个方法(一旦变量跳出该方法即为数据流断开)或可调用对象中的数据流。本地数据流通常比全局数据流更容易、更快、更精确。
+
 
 
 全局数据流分析要继承`DataFlow::Configuration` 这个类，然后重载`isSource` 和`isSink` 方法
-
-
 
 ```
 class MyConfig extends DataFlow::Configuration {
@@ -334,7 +343,9 @@ codeql analyze命令可以执行单个ql文件，目录下所有ql文件，和�
 
 白盒扫描使用如下命令（执行所有漏洞类查询）
 
+```
 codeql database analyze source_database_name qllib/java/ql/src/codeql-suites/java-security-extended.qls --format=csv --output=java-results.csv
+```
 
 如果是自己写可用于analyze的必须按规范写，包含元数据@kind,如下这种
 
