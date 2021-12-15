@@ -416,6 +416,7 @@ codeql database analyze source_database_name qllib/java/ql/src/codeql-suites/jav
 - [Apache Dubbo：条条大路通RCE | GitHub 安全实验室](https://securitylab.github.com/research/apache-dubbo/)
 - [如何用CodeQL数据流复现 apache kylin命令执行漏洞 - 先知社区](https://xz.aliyun.com/t/8240)
 - [如何利用CodeQL挖掘CVE-2020-10199 - 安全客，安全资讯平台](https://www.anquanke.com/post/id/202987)
+- [南大软件分析课程](https://space.bilibili.com/2919428?share_medium=iphone&share_plat=ios&share_session_id=6851D997-0AC6-4C67-B858-BD1E6258C548&share_source=COPY&share_tag=s_i&timestamp=1639480132&unique_k=8wQBAkV)
 
 
 
