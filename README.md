@@ -225,6 +225,21 @@ class MyConfig extends DataFlow::Configuration {
 }
 ```
 
+# 数据流断的原因
+- 外部的方法，因为没有编译到数据库中，这个是最常见的，基本上市面上的扫描器都存在这个问题，说起来复杂，原因大概是因为构建数据流会随着扫描AST的复杂程度递增导致数据库过大，最后大家在时间和易用性上做了平衡，选择了编译直接依赖的内容进行查询，从而导致这个问题的存在。
+
+- 复杂的字符串拼接,例如append，一些其他的字符串赋值，这个一般出场都是空的，要自己去搞，当然会有一些类似fortify的自带了部分场景的连接，不过有的时候要自己去排查
+
+- 强制类型转换
+
+- 动态特性，例如class.ForName。codeQL有很好的反射类支持这个，对比fortify，你就知道什么是好，什么是不好。Fortify的类太简单了，你去看看codeQL官方手册里的类，简直对比下来就是指数级的，哪怕你看一眼 soot，都比fortify好。
+
+
+## isAddtionalStep技巧
+isAddtionalStep使用就用最简单的二分法来定位，先前移sink，然后检测出来的话就移动到后面，直到找到哪个断开的地方。
+冷知识：数据流是可以混用的，例如我们的sink又可以是一个hasFlow表达式   
+
+上面两点来自xsser师傅文章
 
 
 # 污点跟踪
@@ -419,6 +434,7 @@ codeql database analyze source_database_name qllib/java/ql/src/codeql-suites/jav
 - [南大软件分析课程](https://space.bilibili.com/2919428?share_medium=iphone&share_plat=ios&share_session_id=6851D997-0AC6-4C67-B858-BD1E6258C548&share_source=COPY&share_tag=s_i&timestamp=1639480132&unique_k=8wQBAkV)
 - [各种语言危险sink](https://github.com/haby0/sec-note)
 - [利用CodeQL分析并挖掘Log4j漏洞](https://mp.weixin.qq.com/s/JYco8DysQNszMohH6zJEGw)
+- [几张图结构看懂CodeQL数据流](https://mp.weixin.qq.com/s/3mlRedFwPz31Rwe7VDBAuA)
 
 
 
