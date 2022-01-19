@@ -22,7 +22,7 @@
 
 
 
-# 下载
+# 相关下载
 文档： https://codeql.github.com/docs/codeql-cli/    
 二进制：https://github.com/github/codeql-cli-binaries     
 现成项目：https://github.com/github/vscode-codeql-starter  
@@ -32,6 +32,7 @@
 
 # 生成数据库
 
+**ps：生成数据库之前，先保证被分析程序可以正常跑起来。**    
 第一步、创建索引代码数据库。得有数据库才能开始查询。
 
 ```
@@ -108,7 +109,7 @@ codeql database upgrade database/javasec
 
 
 
-## 基础查询
+# 基础查询
 
 
 
@@ -152,9 +153,10 @@ Callable表示可调用的方法或构造器的集合。
 Call表示调用Callable的这个过程（方法调用，构造器调用等等）    
 
 
-过滤 方法调用
+
 
 ### MethodAccess
+过滤 方法调用   
 
 一般是先查`method`，与`MethodAccess.getMethod()` 进行比较。
 
@@ -180,6 +182,15 @@ import java
 from MethodAccess call, Method method
 where method.hasName("toObject") and method.getDeclaringType().getAnAncestor().hasQualifiedName("org.apache.struts2.rest.handler", "ContentTypeHandler") and call.getMethod() = method
 select call
+```
+### 过滤构造方法
+new File的参数为我们的sink点，所以构造ql
+```
+class FileContruct extends ClassInstanceExpr{
+    FileContruct(){
+        this.getConstructor().getDeclaringType*().hasQualifiedName("java.io", "File")
+    }
+}
 ```
 
 
