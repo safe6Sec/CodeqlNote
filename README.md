@@ -3,7 +3,7 @@
 
 
 
-**感兴趣的师傅推荐直接看最下面的书签和文章！！！**
+**该笔记还在整理中，对codeql感兴趣的师傅推荐直接看文末我收集的一些文章！！！**
 
 
 
@@ -19,6 +19,8 @@
 3. codeql里面的谓词其实就是把各种过滤条件封装成方法。
 4. java里面是万物皆对象，我觉得codeql是万物皆表达式。
 5. lgtm除了用来下数据库还可以用来搜索ql
+6. 这个目录/ql/java/ql/src/Security放着一些官方的规则(java)，可直接用。
+7. 这个/ql/java/ql/src/experimental/Security目录下，一些还在实验中的规则(java)。
 
 
 
@@ -194,6 +196,29 @@ class FileContruct extends ClassInstanceExpr{
 ```
 
 
+# codeql java规则目录
+
+
+一些官方规则，可直接用。
+```
+-java
+
+--ql
+
+---src
+
+----Security(正式运行的规则)
+
+----experimental(还在实验中的规则)
+
+---lib
+
+----semmle
+
+-----code
+
+------java(这个下面都是框架相关的内容)
+```
 
 
 
@@ -446,21 +471,14 @@ codeql database analyze source_database_name qllib/java/ql/src/codeql-suites/jav
 - [各种语言危险sink](https://github.com/haby0/sec-note)
 - [利用CodeQL分析并挖掘Log4j漏洞](https://mp.weixin.qq.com/s/JYco8DysQNszMohH6zJEGw)
 - [几张图结构看懂CodeQL数据流](https://mp.weixin.qq.com/s/3mlRedFwPz31Rwe7VDBAuA)
+- [Firebasky师傅的笔记](https://github.com/Firebasky/CodeqlLearn)
+- [凡人老哥codeql学习资料](https://github.com/SummerSec/learning-codeql)
+- [fynch3r师傅的笔记](https://fynch3r.github.io/tags/CodeQL/)
+- [CodeQL 目录、框架和一些有趣的东西](https://mp.weixin.qq.com/s/zSI157qJXYivSvyxHzXALQ)
 
 
 
 
-
-
-# 文章推荐
-
-
-
-- https://github.com/SummerSec/learning-codeql
-- https://www.anquanke.com/post/id/203674
-- https://fynch3r.github.io/tags/CodeQL/
-- https://xz.aliyun.com/t/7482
-- https://www.freebuf.com/articles/web/283795.html
 
 
 
