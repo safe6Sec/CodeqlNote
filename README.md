@@ -476,6 +476,7 @@ codeql database analyze source_database_name qllib/java/ql/src/codeql-suites/jav
 - [fynch3r师傅的笔记](https://fynch3r.github.io/tags/CodeQL/)
 - [CodeQL 目录、框架和一些有趣的东西](https://mp.weixin.qq.com/s/zSI157qJXYivSvyxHzXALQ)
 - [CodeQL 提升篇](https://tttang.com/archive/1415/)
+- [CodeQL与OpenJDK的联动](https://fynch3r.github.io/%E8%AE%B0%E4%B8%80%E6%AC%A1CodeQL%E4%B8%8EOpenJDK%E7%9A%84%E8%81%94%E5%8A%A8/)
 
 
 
