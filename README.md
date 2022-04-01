@@ -479,6 +479,7 @@ codeql database analyze source_database_name qllib/java/ql/src/codeql-suites/jav
 - [CodeQL与OpenJDK的联动](https://fynch3r.github.io/%E8%AE%B0%E4%B8%80%E6%AC%A1CodeQL%E4%B8%8EOpenJDK%E7%9A%84%E8%81%94%E5%8A%A8/)
 - [深入理解CodeQL](https://github.com/ASTTeam/CodeQL)
 - [CodeQL 踩坑指南 - Java](https://tttang.com/archive/1497/)
+- [楼兰师傅codeql学习笔记](https://www.yuque.com/loulan-b47wt/rc30f7)
 
 
 
