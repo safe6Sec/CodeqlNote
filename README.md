@@ -480,6 +480,7 @@ codeql database analyze source_database_name qllib/java/ql/src/codeql-suites/jav
 - [深入理解CodeQL](https://github.com/ASTTeam/CodeQL)
 - [CodeQL 踩坑指南 - Java](https://tttang.com/archive/1497/)
 - [楼兰师傅codeql学习笔记](https://www.yuque.com/loulan-b47wt/rc30f7)
+- [CodeQL能找到log4shell(CVE-2021-44228)漏洞吗](https://mp.weixin.qq.com/s/CkCnAAc0OafEcLiBV17wdg)
 
 
 
